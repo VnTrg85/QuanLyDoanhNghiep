@@ -35,8 +35,4 @@ public class Card {
     @JoinColumn(name="list_card_id",nullable = false)
     private List_cards list_cards;
 
-    @ManyToOne
-    @JoinColumn(name="label_id",nullable = false)
-    private Label label;
-
 }
