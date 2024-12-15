@@ -33,7 +33,7 @@ public class Message {
     @Setter
     @ManyToOne
     @JoinColumn(name="user_id",nullable = false)
-    private User user;
+    private Users user;
 
     @Getter
     @Setter
@@ -44,12 +44,12 @@ public class Message {
     @Getter
     @Setter
     @ManyToOne
-    @JoinColumn(name="task_id",nullable = false)
+    @JoinColumn(name="task_id",nullable = true)
     private Tasks task;
 
     @Getter
     @Setter
     @ManyToOne
-    @JoinColumn(name="calendar_id",nullable = false)
+    @JoinColumn(name="calendar_id",nullable = true)
     private Calendar calendar;
 }
