@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface GroupchatRepository extends JpaRepository<Groupchats,Integer>{
+    boolean existsByName(String groupChatName);
+
 }

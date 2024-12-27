@@ -1,25 +1,25 @@
 package matecom.matecom.Config;
 
+import matecom.matecom.WebSocket.DataHandle;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.messaging.simp.config.MessageBrokerRegistry;
-import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
-import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
-import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
+import org.springframework.web.socket.config.annotation.EnableWebSocket;
+import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
+import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 
 @Configuration
-@EnableWebSocketMessageBroker
-public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
+@EnableWebSocket
+public class WebSocketConfig implements WebSocketConfigurer {
+    /**
+     * http://localhost:8080/data
+     * @param
+     */
     @Override
-    public void configureMessageBroker(MessageBrokerRegistry config) {
-        // Cấu hình message broker
-        config.enableSimpleBroker("/topic"); // Tin nhắn từ server sẽ được gửi đến /topic
-        config.setApplicationDestinationPrefixes("/app"); // Client gửi đến server qua /app
+    public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+        registry.addHandler(getdataHandle(),"/data");
     }
-
-    @Override
-    public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/ws") // Điểm kết nối WebSocket
-                .setAllowedOrigins("http://yourfrontend.com") // Chỉ chấp nhận kết nối từ nguồn này
-                .withSockJS(); // Hỗ trợ SockJS (nếu không có WebSocket trên browser)
+    @Bean
+    DataHandle getdataHandle() {
+        return new DataHandle();
     }
 }

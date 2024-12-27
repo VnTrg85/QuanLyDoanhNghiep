@@ -1,13 +1,12 @@
 package matecom.matecom.Entity;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+@Entity
+@Data
 public class List_cards {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,6 +1,5 @@
 package matecom.matecom.Service.Message;
 
-import matecom.matecom.Converter.MessageConverter;
 import matecom.matecom.DTO.MessageRequestDTO;
 import matecom.matecom.DTO.MessageResponseDTO;
 import matecom.matecom.Entity.Groupchats;
@@ -12,6 +11,8 @@ import matecom.matecom.Repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+import java.sql.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,23 +21,23 @@ public class MessageServiceImpl implements MessageService {
     @Autowired
     private MessageRepository messageRepository;
     @Autowired
-    private MessageConverter messageConverter;
-    @Autowired
     private UsersRepository usersRepository;
     @Autowired
     private GroupchatRepository groupchatRepository;
-    public void saveMessage(MessageRequestDTO messageRequest) {
+
+    public Message saveMessage(MessageRequestDTO messageRequest) {
         Message message = new Message();
         message.setContent(messageRequest.getContent());
         Groupchats groupchat = groupchatRepository.findById(
-                messageRequest.getGroupChat_Id())
+                        messageRequest.getGroupChat_Id())
                 .orElseThrow(() -> new RuntimeException("Group not found"));
         Users user = usersRepository.findById(
-                messageRequest.getUser_Id())
+                        messageRequest.getUserId())
                 .orElseThrow(() -> new RuntimeException("User not found"));
         message.setGroupchats(groupchat);
         message.setUser(user);
-        messageRepository.save(message);
+        message.setDate_created(new Date(System.currentTimeMillis()));
+        return messageRepository.save(message);
     }
 
     public List<MessageResponseDTO> getMessages(int groupChatId) {
@@ -47,6 +48,11 @@ public class MessageServiceImpl implements MessageService {
                         msg.getUser().getUsername(),
                         msg.getDate_created().toLocalDate().atStartOfDay()))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void deleteMessage(int messageId) {
+            messageRepository.deleteById(messageId);
     }
 
 }

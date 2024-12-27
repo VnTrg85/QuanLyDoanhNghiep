@@ -1,11 +1,15 @@
 package matecom.matecom.Entity;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Data
 public class Groupchats {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,4 +17,9 @@ public class Groupchats {
     @Getter
     @Setter
     private String name;
+
+    @Getter
+    @Setter
+    @OneToMany(mappedBy = "groupchats",cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
+    private List<Message> messages= new ArrayList<>();
 }

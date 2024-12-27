@@ -7,10 +7,13 @@ import lombok.Setter;
 public class MessageRequestDTO {
     @Getter
     @Setter
+    private int  id;
+    @Getter
+    @Setter
     private Integer groupChat_Id;
     @Getter
     @Setter
-    private Integer user_Id;
+    private Integer userId;
     @Getter
     @Setter
     @NonNull

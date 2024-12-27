@@ -7,6 +7,7 @@ import matecom.matecom.Entity.Message;
 import java.util.List;
 
 public interface MessageService {
-    void saveMessage(MessageRequestDTO messageRequest);
+    Message saveMessage(MessageRequestDTO messageRequest);
     List<MessageResponseDTO> getMessages(int groupChatId);
+    void deleteMessage(int messageId);
 }
