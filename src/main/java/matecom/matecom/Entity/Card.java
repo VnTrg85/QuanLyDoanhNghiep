@@ -2,14 +2,13 @@ package matecom.matecom.Entity;
 
 import java.sql.Date;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+@Entity
+@Data
 public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
