@@ -2,17 +2,19 @@ package matecom.matecom.Entity;
 
 import java.sql.Date;
 
-import org.springframework.data.annotation.Id;
-
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+@Entity
+@Data
 public class Calendar {
-    @Id
+    @jakarta.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
